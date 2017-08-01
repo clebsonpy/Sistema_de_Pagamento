@@ -31,10 +31,10 @@ class UpdateData():
         paymentSchedule = objec.paymentSchedule
         db = conn.Connect(self.name_db)
         if objec.paymentSchedule == None:
-            sql = """UPDATE Employee SET paymentMethod = '%s', belongUnion = '%s', idUnion = %s, rateUnion = %s WHERE codOnly = %s""" \
+            sql = """UPDATE PaymentInfo SET paymentMethod = '%s', belongUnion = '%s', idUnion = %s, rateUnion = %s WHERE codOnly = %s""" \
                   % (paymentMethod, belongUnion, idUnion, rateUnion, codOnly)
         else:
-            sql = """UPDATE Employee SET paymentMethod = '%s', belongUnion = '%s', idUnion = %s, rateUnion = %s, paymentSchedule = '%s' WHERE codOnly = %s""" \
+            sql = """UPDATE PaymentInfo SET paymentMethod = '%s', belongUnion = '%s', idUnion = %s, rateUnion = %s, paymentSchedule = '%s' WHERE codOnly = %s""" \
                   % (paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule, codOnly)
 
         db.cursor.execute(sql)

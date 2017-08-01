@@ -13,6 +13,7 @@ class SystemPayment():
     def paymentCommission(self):
         read = ReadData(self.name_db)
         previousPayment = read.readPaymentHistory(self.objec)[1]
+
         salesHistory = read.readSalesHistory(self.objec, previousPayment)
         serviceRate = read.readServiceRate(self.objec, previousPayment)
         totalRate = 0
@@ -22,10 +23,11 @@ class SystemPayment():
         for sales in salesHistory:
             totalSales += sales[2]
 
-        payment = object.salary + (totalSales * object.commission)
+        print(totalSales, totalRate)
+        payment = self.objec.salary + (totalSales * self.objec.commission)
         paymentLiquid = self.discounts(payment, totalRate)
         insert = InsertData(self.name_db)
-        insert.paymentHistory(object.codOnly, self.date, payment)
+        insert.paymentHistory(self.objec.codOnly, self.date, payment)
         return paymentLiquid, payment
 
     def paymentSalary(self):
@@ -35,12 +37,10 @@ class SystemPayment():
         totalSales = 0
         paymentLiquid = self.discounts(payment, totalRate)
         insert = InsertData(self.name_db)
-        insert.paymentHistory(object.codOnly, self.date, payment)
+        insert.paymentHistory(self.objec.codOnly, self.date, payment)
         return paymentLiquid, payment
 
-    def paymentHourly(self):
-
-
+    #def paymentHourly(self):
 
     def discounts(self, payment, totalRate):
         paymentLiquid = ((100 - self.rateDiscounts)/100) * payment

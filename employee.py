@@ -14,13 +14,13 @@ class Employee():
         self.rateUnion = None
         self.paymentSchedule = None
 
-    def paymentInfo(self, paymentMethod, belongUnion, idUnion, rateUnion, PaymentSchedule):
+    def paymentInfo(self, paymentMethod, belongUnion, idUnion, rateUnion, PaymentSchedule = None):
         insert = InsertData("Employees")
         insert.paymentInfo(self.codOnly, paymentMethod, belongUnion, idUnion, rateUnion, PaymentSchedule)
 
     def serviceRate(self, date, rate):
         insert = InsertData("Employees")
-        insert.serviceRate(self.codOnly, date, rate
+        insert.serviceRate(self.codOnly, date, rate)
 
     def __str__(self):
         return self.name

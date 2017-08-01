@@ -32,16 +32,22 @@ class InsertData():
 
     def salesHistory(self, codOnly, date, value):
         db = conn.Connect(self.name_db)
-        sql = """INSERT INTO SalesHistory(codOnly, date, value) VALUES (%s, %s, %s)""" \
+        sql = """INSERT INTO SalesHistory(codOnly, date, value) VALUES (%s, '%s', %s)""" \
               %(codOnly, date, value)
         db.cursor.execute(sql)
         db.commit_db()
         db.close_db()
 
-    def paymentInfo(self, codOnly, paymentMethod, belongUnion, idUnion, rateUnion):
+    def paymentInfo(self, codOnly, paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule):
         db = conn.Connect(self.name_db)
-        sql = """INSERT INTO PaymentInfo(codOnly, paymentMethod, belongUnion, idUnion, rateUnion) VALUES (%s, '%s', '%s', %s, %s)""" \
-              %(codOnly, paymentMethod, belongUnion, idUnion, rateUnion)
+        if paymentSchedule == None:
+            sql = sql = """INSERT INTO PaymentInfo(codOnly, paymentMethod, belongUnion, idUnion, rateUnion) VALUES (%s, '%s', '%s', %s, %s)""" \
+                  %(codOnly, paymentMethod, belongUnion, idUnion, rateUnion)
+        else:
+            sql = """INSERT INTO PaymentInfo(codOnly, paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule) VALUES (%s, '%s', '%s', %s, %s, '%s')""" \
+                  %(codOnly, paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule)
+
+        
         db.cursor.execute(sql)
         db.commit_db()
         db.close_db()
@@ -56,7 +62,7 @@ class InsertData():
 
     def paymentHistory(self, codOnly, datePayment, value):
         db = conn.Connect(self.name_db)
-        sql = """INSERT INTO PaymentHistory(codOnly, datePayment, value) VALUES (%s, '%s', %s)""" \
+        sql = """INSERT INTO PaymentHistory(codOnly, previousPayment, value) VALUES (%s, '%s', %s)""" \
               %(codOnly, datePayment, value)
         db.cursor.execute(sql)
         db.commit_db()

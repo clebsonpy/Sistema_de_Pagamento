@@ -39,7 +39,7 @@ class RemoveEmployee():
         self.employeeCodOnly = employeeCodOnly
 
 
-    def remove(self):
+    def save(self):
         remove = RemoveData(self.name_db)
         remove.remove(self.employeeCodOnly)
 
@@ -52,7 +52,12 @@ class UpdateEmployee():
         self.objec = objec
         self.description = description
 
-    def update(self):
+    def save(self):
         update = UpdateData(self.name_db)
-        update.updateEmployee(self.objec, self.description)
-        update.updatePaymentInfo(self.objec)
+        read = ReadData(self.name_db)
+        employee = read.readPaymentInfo(self.objec)
+        if employee.paymentMethod == None:
+            update.updateEmployee(self.objec, self.description)
+        else:
+            update.updateEmployee(self.objec, self.description)
+            update.updatePaymentInfo(self.objec)
