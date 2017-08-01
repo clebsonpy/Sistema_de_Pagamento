@@ -13,12 +13,10 @@ class InsertData():
         description = objec.description
         salary = objec.salary
         commission = objec.commission
-
         db = conn.Connect(self.name_db)
         sql = """INSERT INTO Employee(codOnly, firstName, address, description, salary, commission) VALUES(%s, '%s', '%s', '%s', %s, %s)"""\
                 % (codOnly, firstName, address, description, salary, commission)
 
-        print(sql)
         db.cursor.execute(sql)
         db.commit_db()
         db.close_db()

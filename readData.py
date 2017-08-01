@@ -35,11 +35,13 @@ class ReadData():
         sql = "SELECT * FROM PaymentInfo WHERE codOnly = %s" % objec.codOnly
         db.cursor.execute(sql)
         paymentInfo = db.cursor.fetchone()
-        codOnly, paymentMethod, belongUnion, idUnion, rateUnion = paymentInfo
+        print(paymentInfo)
+        codOnly, paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule= paymentInfo
         objec.paymentMethod = paymentMethod
         objec.belongUnion = belongUnion
         objec.idUnion = idUnion
         objec.rateUnion = rateUnion
+        objec.paymentSchedule = paymentSchedule
         db.close_db()
 
     def readTimecard(self, objec):

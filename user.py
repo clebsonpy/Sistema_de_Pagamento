@@ -19,14 +19,11 @@ class AddEmployee():
         objects = ReadData(self.name_db).readEmployee()
         ids = []
         for i in objects:
-            print(i.codOnly)
             ids.append(i.codOnly)
 
         idx = random.randint(1000, 10000)
         while idx in ids:
             idx = random.randint(100, 1000)
-
-        print(idx)
         return idx
 
     def save(self):
@@ -36,9 +33,11 @@ class AddEmployee():
 
 class RemoveEmployee():
 
+    name_db = "Employees"
+
     def __init__(self, employeeCodOnly):
         self.employeeCodOnly = employeeCodOnly
-        self.name_db = "Employees"
+
 
     def remove(self):
         remove = RemoveData(self.name_db)
@@ -47,11 +46,13 @@ class RemoveEmployee():
 
 class UpdateEmployee():
 
-    def __init__(self, objec):
+    name_db = "Employees"
+
+    def __init__(self, objec, description = None):
         self.objec = objec
-        self.name_db = "Employees"
+        self.description = description
 
     def update(self):
         update = UpdateData(self.name_db)
-        update.updateEmployee(self.objec)
+        update.updateEmployee(self.objec, self.description)
         update.updatePaymentInfo(self.objec)

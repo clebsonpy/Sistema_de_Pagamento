@@ -46,8 +46,8 @@ FOREIGN KEY(codOnly) REFERENCES Employee(codOnly)
 
 cursor.execute("""CREATE TABLE PaymentHistory(
 codOnly INTEGER NOT NULL,
-previousPayment DATETIME, NOT NULL,
-value FLOAT, NOT NULL,
+previousPayment DATETIME NOT NULL,
+value FLOAT NOT NULL,
 FOREIGN KEY(codOnly) REFERENCES Employee(codOnly)
 )""")
 
