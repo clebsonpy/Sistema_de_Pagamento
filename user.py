@@ -56,8 +56,13 @@ class UpdateEmployee():
         update = UpdateData(self.name_db)
         read = ReadData(self.name_db)
         employee = read.readPaymentInfo(self.objec)
-        if employee.paymentMethod == None:
+        if employee == None:
             update.updateEmployee(self.objec, self.description)
+            self.objec.paymentInfo(self.objec.paymentMethod,
+                                    self.objec.belongUnion,
+                                    self.objec.idUnion,
+                                    self.objec.rateUnion,
+                                    self.objec.paymentSchedule)
         else:
             update.updateEmployee(self.objec, self.description)
             update.updatePaymentInfo(self.objec)

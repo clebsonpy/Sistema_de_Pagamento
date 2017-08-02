@@ -5,6 +5,13 @@ class InteractionUser():
 
     def __init__(self, name_db):
         self.name_db = name_db
+        self.employee = None
+
+    def employeeEnter(self):
+        codOnly = int(input("Código Único: "))
+        read = ReadData(self.name_db)
+        self.employee = read.readEmployee(codOnly)
+        self.menu()
 
     def menu(self):
         print("1 - Adição de um empregado\n"\
@@ -17,7 +24,8 @@ class InteractionUser():
               "8 - Undo/redo\n"\
               "9 - Agenda de Pagamento\n"\
               "0 - Criação de Novas Agendas de Pagamento\n"\
-              "exit - Sair")
+              "e - Sair\n"\
+              "l - Empregado\n")
         self.menuAction(input("Opção: "))
 
     def menuAction(self, op):
@@ -25,9 +33,16 @@ class InteractionUser():
             self.addEmployee()
         elif op == '2':
             self.removeEmployee()
+        elif op == '3':
+            self.timecard()
+        elif op == '4':
+            self.salesHistory()
+        elif op == '5':
+            self.rateService()
+        elif op == 'l':
+            self.employeeEnter()
         elif op == '6':
             self.updateEmployee()
-
 
     def addEmployee(self):
         name = input("Nome: ")
@@ -39,16 +54,33 @@ class InteractionUser():
         employee.save()
         self.menu()
 
-    def removeEmployee(self, op):
-        codOnly = int(input("Código Único: "))
-        remove = RemoveEmploye(codOnly)
+    def removeEmployee(self):
+        if self.employee == None:
+            print("Entre com o Empregado!")
+            self.menu()
+        remove = RemoveEmploye(self.employee.codOnly)
         remove.save()
         self.menu()
 
+    def rateService(self):
+        date = input("Data: ")
+        rate = float(input("Valor da Taxa: "))
+        self.employee.serviceRate(date, rate)
+        self.menu()
+
+    def salesHistory(self):
+        date = input("Data da Venda: ")
+        value = float(input("Valor da Venda: "))
+        self.employee.salesHistory(date, value)
+        self.menu()
+
+    def timecard(self):
+        hour = float(input("Horas: "))
+        date = input("Data: ")
+        self.employee.timecard(date, hour)
+        self.menu()
+
     def updateEmployee(self):
-        codOnly = int(input("Código Único: "))
-        read = ReadData(self.name_db)
-        employee = read.readEmployee(codOnly)
         description = None
         print("1 - Nome\n"\
               "2 - Endereço\n"\
@@ -56,23 +88,26 @@ class InteractionUser():
               "4 - Método de Pagamento\n"\
               "5 - Pertence ao sindicato\n"\
               "6 - Taxa Sindical\n"\
-              "exit - Sair")
+              "7 - Código Sindicato\n"\
+              "e - Sair")
         opu = input("Alterar: ")
-        while opu != 'exit':
+        while opu != 'e':
             if opu == '1':
-                employee.name = input("Nome: ")
+                self.employee.name = input("Nome: ")
             elif opu == '2':
-                employee.address = input("Endereço: ")
+                self.employee.address = input("Endereço: ")
             elif opu == '3':
-                employee.description = input("Descrição: ")
+                self.employee.description = input("Descrição: ")
             elif opu == '4':
-                employee.paymentMethod = input("Método de Pagamento: ")
+                self.employee.paymentMethod = input("Método de Pagamento: ")
             elif opu == '5':
-                employee.belongUnion = input("Pertence ao sindicato")
+                self.employee.belongUnion = input("Pertence ao sindicato: ")
             elif opu == '6':
-                employee.rateUnion = input("Taxa Sindical: ")
+                self.employee.rateUnion = input("Taxa Sindical: ")
+            elif opu == '7':
+                self.employee.idUnion = input("Código Sindicato: ")
             opu = input("Alterar: ")
 
-        update = UpdateEmployee(employee, description)
+        update = UpdateEmployee(self.employee, description)
         update.save()
         self.menu()

@@ -47,7 +47,6 @@ class InsertData():
             sql = """INSERT INTO PaymentInfo(codOnly, paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule) VALUES (%s, '%s', '%s', %s, %s, '%s')""" \
                   %(codOnly, paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule)
 
-        
         db.cursor.execute(sql)
         db.commit_db()
         db.close_db()

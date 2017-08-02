@@ -51,7 +51,7 @@ class ReadData():
         db.close_db()
         print(paymentInfo)
         if paymentInfo == None:
-            return objec
+            return None
         else:
             codOnly, paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule = paymentInfo
             objec.paymentMethod = paymentMethod
