@@ -6,6 +6,7 @@ class InteractionUser():
     def __init__(self, name_db):
         self.name_db = name_db
         self.employee = None
+        self.employees = None
 
     def employeeEnter(self):
         codOnly = int(input("Código Único: "))
@@ -24,8 +25,9 @@ class InteractionUser():
               "8 - Undo/redo\n"\
               "9 - Agenda de Pagamento\n"\
               "0 - Criação de Novas Agendas de Pagamento\n"\
-              "e - Sair\n"\
-              "l - Empregado\n")
+              "l - Empregado\n"\
+              "a - Mostrar todos empregados\n"\
+              "e - Sair")
         self.menuAction(input("Opção: "))
 
     def menuAction(self, op):
@@ -43,6 +45,8 @@ class InteractionUser():
             self.employeeEnter()
         elif op == '6':
             self.updateEmployee()
+        elif op == 'a':
+            self.eEmployees()
 
     def addEmployee(self):
         name = input("Nome: ")
@@ -60,6 +64,12 @@ class InteractionUser():
             self.menu()
         remove = RemoveEmploye(self.employee.codOnly)
         remove.save()
+        self.menu()
+
+    def eEmployees(self):
+        read = ReadData(self.name_db)
+        self.employees = read.readEmployee()
+        print(self.employees)
         self.menu()
 
     def rateService(self):

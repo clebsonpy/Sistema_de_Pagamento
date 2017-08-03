@@ -1,3 +1,5 @@
+import abc
+from abc import abstractmethod
 import random
 from insertData import InsertData
 
@@ -22,11 +24,15 @@ class Employee():
         insert = InsertData("Employees")
         insert.serviceRate(self.codOnly, date, rate)
 
+    @abstractmethod
+    def payment(self):
+        """Payment"""
+
     def __str__(self):
         return self.name
 
     def __repr__(self):
-        return "Code Only: {}\n" \
+        return "<Code Only: {}\n" \
                "Name: {}\n" \
                "Address: {}\n" \
                "Description: {}\n" \
@@ -35,39 +41,43 @@ class Employee():
                "Payment Method: {}\n" \
                "Belong Union: {}\n" \
                "Id Union: {}\n" \
-               "Union Rate: {}".format(self.codOnly, self.name,
+               "Union Rate: {}\n"\
+               "paymentSchedule: {}>".format(self.codOnly, self.name,
                                 self.address, self.description,
                                 self.salary, self.commission, self.paymentMethod,
-                                self.belongUnion, self.idUnion, self.rateUnion)
+                                self.belongUnion, self.idUnion, self.rateUnion,
+                                self.paymentSchedule)
 
 class Salared(Employee):
 
     def __init__(self, name, address, salary):
         super().__init__(name, address, salary)
+        self.description = "Salared"
 
     def __str__(self):
         return self.name
 
     def __repr__(self):
-        return "Code Only: {}\n" \
+        return "<Code Only: {}\n" \
                "Name: {}\n" \
                "Address: {}\n" \
-               "Description: {}\n" \
-               "Salary: {}\n" \
-               "Commission: {}\n" \
+               "Salared: {}\n"\
+               "Salary: {}\n"\
                "Payment Method: {}\n" \
                "Belong Union: {}\n" \
                "Id Union: {}\n" \
-               "Union Rate: {}".format(self.codOnly, self.name,
-                                self.address, self.description,
-                                self.salary, self.commission, self.paymentMethod,
-                                self.belongUnion, self.idUnion, self.rateUnion)
+               "Union Rate: {}\n"\
+               "paymentSchedule: {}>".format(self.codOnly, self.name,
+                                self.address, self.salary, self.description,
+                                self.paymentMethod, self.belongUnion,
+                                self.idUnion, self.rateUnion, self.paymentSchedule)
 
 class Commissioner(Salared):
 
     def __init__(self, name, address, salary, commission):
         super().__init__(name, address, salary)
         self.commission = commission
+        self.description = "Commissioner"
 
     def salesHistory(self, date, value):
         insert = InsertData("Employees")
@@ -77,7 +87,7 @@ class Commissioner(Salared):
         return self.name
 
     def __repr__(self):
-        return "Code Only: {}\n" \
+        return "<Code Only: {}\n" \
                "Name: {}\n" \
                "Address: {}\n" \
                "Description: {}\n" \
@@ -86,15 +96,18 @@ class Commissioner(Salared):
                "Payment Method: {}\n" \
                "Belong Union: {}\n" \
                "Id Union: {}\n" \
-               "Union Rate: {}".format(self.codOnly, self.name,
+               "Union Rate: {}\n"\
+               "paymentSchedule: {}>".format(self.codOnly, self.name,
                                 self.address, self.description,
-                                self.salary, self.commission, self.paymentMethod,
-                                self.belongUnion, self.idUnion, self.rateUnion)
+                                self.salary, self.commission,
+                                self.paymentMethod, self.belongUnion,
+                                self.idUnion, self.rateUnion, self.paymentSchedule)
 
 class Hourly(Employee):
 
     def __init__(self, name, address, salary):
         super().__init__(name, address, salary)
+        self.description = "Hourly"
 
     def timecard(self, date, hourly):
         insert = InsertData("Employees")
@@ -107,16 +120,17 @@ class Hourly(Employee):
         return self.name
 
     def __repr__(self):
-        return "Code Only: {}\n" \
+        return "<Code Only: {}\n" \
                "Name: {}\n" \
                "Address: {}\n" \
                "Description: {}\n" \
                "Salary: {}\n" \
-               "Commission: {}\n" \
                "Payment Method: {}\n" \
                "Belong Union: {}\n" \
                "Id Union: {}\n" \
-               "Union Rate: {}".format(self.codOnly, self.name,
+               "Union Rate: {}\n"\
+               "paymentSchedule: {}>".format(self.codOnly, self.name,
                                 self.address, self.description,
-                                self.salary, self.commission, self.paymentMethod,
-                                self.belongUnion, self.idUnion, self.rateUnion)
+                                self.salary, self.paymentMethod,
+                                self.belongUnion, self.idUnion,
+                                self.rateUnion, self.paymentSchedule)

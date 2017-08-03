@@ -15,6 +15,7 @@ class ReadData():
             employees = []
             for data in list:
                 employee = self.__employee(data)
+                employee = self.readPaymentInfo(employee)
                 employees.append(employee)
             db.close_db()
             return employees
@@ -49,9 +50,8 @@ class ReadData():
         db.cursor.execute(sql)
         paymentInfo = db.cursor.fetchone()
         db.close_db()
-        print(paymentInfo)
         if paymentInfo == None:
-            return None
+            return objec
         else:
             codOnly, paymentMethod, belongUnion, idUnion, rateUnion, paymentSchedule = paymentInfo
             objec.paymentMethod = paymentMethod
