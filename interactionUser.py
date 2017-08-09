@@ -92,6 +92,10 @@ class InteractionUser():
 
     def updateEmployee(self):
         description = None
+        if self.employee == None:
+            self.employeeEnter()
+            self.updateEmployee()
+
         print("1 - Nome\n"\
               "2 - Endereço\n"\
               "3 - Descrição\n"\

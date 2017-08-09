@@ -16,9 +16,11 @@ class Employee():
         self.rateUnion = None
         self.paymentSchedule = None
 
-    def paymentInfo(self, paymentMethod, belongUnion, idUnion, rateUnion, PaymentSchedule = None):
+    def paymentInfo(self, paymentMethod, belongUnion, idUnion, rateUnion,
+                    PaymentSchedule = None):
         insert = InsertData("Employees")
-        insert.paymentInfo(self.codOnly, paymentMethod, belongUnion, idUnion, rateUnion, PaymentSchedule)
+        insert.paymentInfo(self.codOnly, paymentMethod, belongUnion,
+                            idUnion, rateUnion, PaymentSchedule)
 
     def serviceRate(self, date, rate):
         insert = InsertData("Employees")
@@ -44,8 +46,9 @@ class Employee():
                "Union Rate: {}\n"\
                "paymentSchedule: {}>".format(self.codOnly, self.name,
                                 self.address, self.description,
-                                self.salary, self.commission, self.paymentMethod,
-                                self.belongUnion, self.idUnion, self.rateUnion,
+                                self.salary, self.commission,
+                                self.paymentMethod, self.belongUnion,
+                                self.idUnion, self.rateUnion,
                                 self.paymentSchedule)
 
 class Salared(Employee):
@@ -70,7 +73,8 @@ class Salared(Employee):
                "paymentSchedule: {}>".format(self.codOnly, self.name,
                                 self.address, self.salary, self.description,
                                 self.paymentMethod, self.belongUnion,
-                                self.idUnion, self.rateUnion, self.paymentSchedule)
+                                self.idUnion, self.rateUnion,
+                                self.paymentSchedule)
 
 class Commissioner(Salared):
 
@@ -101,7 +105,8 @@ class Commissioner(Salared):
                                 self.address, self.description,
                                 self.salary, self.commission,
                                 self.paymentMethod, self.belongUnion,
-                                self.idUnion, self.rateUnion, self.paymentSchedule)
+                                self.idUnion, self.rateUnion,
+                                self.paymentSchedule)
 
 class Hourly(Employee):
 
